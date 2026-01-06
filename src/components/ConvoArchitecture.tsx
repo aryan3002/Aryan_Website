@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { MessageSquare, Mic, BarChart3, Phone, Calendar } from "lucide-react";
 
 const nodes = [
@@ -19,10 +19,15 @@ const connections = [
 ];
 
 export default function ConvoArchitecture() {
+  const shouldReduceMotion = useReducedMotion();
+  
   return (
-    <div className="relative w-full max-w-3xl mx-auto aspect-video bg-zinc-900/50 rounded-2xl border border-zinc-800 overflow-hidden p-6 md:p-10">
+    <div className="relative w-full max-w-3xl mx-auto aspect-video bg-gradient-to-b from-zinc-900/60 to-zinc-900/40 rounded-2xl border border-white/[0.06] overflow-hidden p-6 md:p-10">
+      {/* Subtle depth glow */}
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.03] via-transparent to-purple-500/[0.03]" />
+      
       {/* Grid */}
-      <div className="absolute inset-0 grid-pattern opacity-30" />
+      <div className="absolute inset-0 grid-pattern opacity-20" />
 
       {/* Connections */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none">
@@ -37,11 +42,11 @@ export default function ConvoArchitecture() {
               x2={`${to.x}%`}
               y2={`${to.y}%`}
               stroke="url(#gradient)"
-              strokeWidth="2"
-              strokeDasharray="6 4"
+              strokeWidth="1.5"
+              strokeDasharray="6 6"
               initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ pathLength: 1, opacity: 0.4 }}
-              transition={{ duration: 1.2, delay: 0.3 + i * 0.15 }}
+              animate={{ pathLength: 1, opacity: 0.35 }}
+              transition={{ duration: 1.4, delay: 0.4 + i * 0.12, ease: [0.2, 0.9, 0.3, 1] }}
             />
           );
         })}
@@ -57,12 +62,14 @@ export default function ConvoArchitecture() {
       {nodes.map((node, i) => (
         <motion.div
           key={node.id}
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.4, delay: i * 0.1 }}
-          className={`absolute flex items-center gap-2 ${
-            node.main ? "glass-strong p-3 rounded-xl" : "glass p-2 rounded-lg"
-          }`}
+          transition={{ duration: 0.5, delay: 0.15 + i * 0.08, ease: [0.2, 0.9, 0.3, 1] }}
+          className={`absolute flex items-center gap-2.5 ${
+            node.main 
+              ? "bg-white/[0.06] backdrop-blur-sm p-3.5 rounded-xl border border-white/[0.1]" 
+              : "bg-white/[0.03] backdrop-blur-sm p-2.5 rounded-lg border border-white/[0.06]"
+          } transition-all duration-200 hover:border-indigo-400/30 hover:bg-white/[0.08]`}
           style={{
             left: `${node.x}%`,
             top: `${node.y}%`,
@@ -70,22 +77,25 @@ export default function ConvoArchitecture() {
           }}
         >
           <div
-            className={`${node.main ? "w-10 h-10" : "w-8 h-8"} rounded-lg flex items-center justify-center`}
-            style={{ backgroundColor: `${node.color}20` }}
+            className={`${node.main ? "w-10 h-10" : "w-8 h-8"} rounded-lg flex items-center justify-center transition-transform duration-200`}
+            style={{ backgroundColor: `${node.color}15` }}
           >
             <node.icon className={`${node.main ? "w-5 h-5" : "w-4 h-4"}`} style={{ color: node.color }} />
           </div>
-          <span className={`text-white ${node.main ? "font-semibold text-sm" : "text-xs"} whitespace-nowrap`}>
+          <span className={`text-white ${node.main ? "font-semibold text-sm" : "text-xs font-medium"} whitespace-nowrap`}>
             {node.label}
           </span>
         </motion.div>
       ))}
 
-      {/* Animated pulse */}
+      {/* Animated data pulse - refined */}
       <motion.div
-        animate={{ x: ["-100%", "200%"], opacity: [0, 1, 1, 0] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-        className="absolute top-[40%] left-[25%] w-6 h-6 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 blur-md"
+        animate={shouldReduceMotion ? {} : { 
+          x: ["-100%", "200%"], 
+          opacity: [0, 0.8, 0.8, 0] 
+        }}
+        transition={{ duration: 4, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
+        className="absolute top-[40%] left-[25%] w-4 h-4 rounded-full bg-gradient-to-r from-indigo-400 to-purple-400 blur-sm"
       />
     </div>
   );

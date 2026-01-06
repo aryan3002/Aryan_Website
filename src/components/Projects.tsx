@@ -112,125 +112,156 @@ function HeroProject({ project }: { project: Project }) {
       ref={ref}
       initial={{ opacity: 0 }}
       animate={isInView ? { opacity: 1 } : {}}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 1, ease: [0.2, 0.9, 0.3, 1] }}
       className="relative w-full max-w-6xl mx-auto"
     >
-      {/* Glow */}
-      <div className={`absolute inset-0 bg-gradient-to-r ${project.color} opacity-10 blur-3xl rounded-[28px]`} />
-      <div className="absolute inset-0 bg-gradient-to-b from-white/4 via-transparent to-black/40 rounded-[28px]" />
+      {/* Layered Glow System for Depth */}
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={isInView ? { opacity: 1, scale: 1 } : {}}
+        transition={{ duration: 1.2, ease: [0.2, 0.9, 0.3, 1] }}
+        className={`absolute -inset-4 bg-gradient-to-r ${project.color} opacity-[0.08] blur-[80px] rounded-[40px]`} 
+      />
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        className="absolute inset-0 bg-gradient-to-b from-white/[0.03] via-transparent to-black/50 rounded-[24px]" 
+      />
 
-      <div className="relative card overflow-hidden border border-white/10 bg-gradient-to-b from-white/5 via-black/40 to-black/80">
-        {/* Header */}
-        <div className="p-10 lg:p-14 text-center border-b border-white/5">
+      <div className="relative overflow-hidden rounded-[24px] border border-white/[0.08] bg-gradient-to-b from-white/[0.04] via-black/50 to-black/90 shadow-2xl">
+        {/* Header - Product Reveal Style */}
+        <div className="p-12 lg:p-16 text-center border-b border-white/[0.04]">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.15 }}
-            className="space-y-4 flex flex-col items-center"
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.2, 0.9, 0.3, 1] }}
+            className="space-y-6 flex flex-col items-center"
           >
+            {/* Refined Tags */}
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 text-sm text-zinc-200 border border-white/10">
-                <Sparkles className="w-4 h-4 text-indigo-300" />
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] text-sm text-zinc-300 border border-white/[0.08] backdrop-blur-sm">
+                <Sparkles className="w-4 h-4 text-indigo-400" />
                 Featured Project
               </span>
-              <span className="px-3 py-1 rounded-full bg-indigo-500/15 text-xs text-indigo-100 border border-indigo-400/30">
+              <span className="px-3 py-1.5 rounded-full bg-indigo-500/10 text-xs font-medium text-indigo-200 border border-indigo-400/20">
                 Agentic SaaS
               </span>
-              <span className="px-3 py-1 rounded-full bg-emerald-500/15 text-xs text-emerald-100 border border-emerald-400/30">
+              <span className="px-3 py-1.5 rounded-full bg-emerald-500/10 text-xs font-medium text-emerald-200 border border-emerald-400/20">
                 Voice + Chat
               </span>
-              <span className="px-3 py-1 rounded-full bg-cyan-500/15 text-xs text-cyan-100 border border-cyan-400/30">
+              <span className="px-3 py-1.5 rounded-full bg-cyan-500/10 text-xs font-medium text-cyan-200 border border-cyan-400/20">
                 Live Scheduling
               </span>
             </div>
-            <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-[0_10px_40px_rgba(99,102,241,0.25)]">
+
+            {/* Hero Title - Apple Product Style */}
+            <motion.h3 
+              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.25, ease: [0.2, 0.9, 0.3, 1] }}
+              className="text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-[-0.03em]"
+              style={{
+                textShadow: '0 8px 32px rgba(99, 102, 241, 0.25), 0 2px 8px rgba(0, 0, 0, 0.5)'
+              }}
+            >
               {project.title}
-            </h3>
-            <p className="text-xl md:text-2xl text-zinc-200 max-w-3xl mx-auto leading-relaxed">
+            </motion.h3>
+
+            {/* Tagline - Refined Typography */}
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.35 }}
+              className="text-xl md:text-2xl text-zinc-300 max-w-3xl mx-auto leading-relaxed font-light tracking-[-0.01em]"
+            >
               &ldquo;{project.tagline}&rdquo;
-            </p>
+            </motion.p>
           </motion.div>
         </div>
 
-        {/* Description + Diagram */}
-        <div className="p-10 lg:p-14 border-b border-white/5 flex flex-col items-center">
+        {/* Description + Architecture Diagram */}
+        <div className="p-12 lg:p-16 border-b border-white/[0.04] flex flex-col items-center">
           <motion.p
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 12 }}
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.45, delay: 0.15 }}
-            className="text-lg text-zinc-400 max-w-2xl text-center mb-12"
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.2, 0.9, 0.3, 1] }}
+            className="text-lg text-zinc-400 max-w-2xl text-center mb-14 leading-relaxed"
           >
             {project.description}
           </motion.p>
           
           {project.id === "convo" && (
             <motion.div
-              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 12 }}
+              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.45, delay: 0.2 }}
+              transition={{ duration: 0.7, delay: 0.3, ease: [0.2, 0.9, 0.3, 1] }}
             >
               <ConvoArchitecture />
             </motion.div>
           )}
         </div>
 
-        {/* Features */}
-        <div className="p-10 lg:p-14">
+        {/* Features Grid - Refined Cards */}
+        <div className="p-12 lg:p-16">
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.45, delay: 0.25 }}
-            className="grid md:grid-cols-2 gap-6"
+            transition={{ duration: 0.6, delay: 0.35 }}
+            className="grid md:grid-cols-2 gap-5"
           >
             {project.features.map((feature, i) => (
               <motion.div
                 key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.5 + i * 0.1 }}
-                className="card bg-white/2 rounded-2xl p-5 group hover:border-indigo-400/40 hover:shadow-indigo-500/10"
+                transition={{ duration: 0.5, delay: 0.4 + i * 0.08, ease: [0.2, 0.9, 0.3, 1] }}
+                className="group p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] 
+                           transition-all duration-250 ease-[cubic-bezier(0.2,0.9,0.3,1)]
+                           hover:bg-white/[0.04] hover:border-indigo-400/30"
               >
-                <div className={`w-10 h-10 rounded-lg bg-gradient-to-r ${project.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
+                <div className={`w-11 h-11 rounded-xl bg-gradient-to-r ${project.color} 
+                                flex items-center justify-center mb-4 
+                                transition-transform duration-200 ease-[cubic-bezier(0.2,0.9,0.3,1)]
+                                group-hover:scale-105`}>
                   <feature.icon className="w-5 h-5 text-white" />
                 </div>
-                <h4 className="font-semibold text-white mb-1">{feature.title}</h4>
-                <p className="text-sm text-zinc-500">{feature.description}</p>
+                <h4 className="font-semibold text-white mb-1.5 tracking-[-0.01em]">{feature.title}</h4>
+                <p className="text-sm text-zinc-500 leading-relaxed">{feature.description}</p>
               </motion.div>
             ))}
           </motion.div>
         </div>
 
-        {/* Tech + Links */}
-        <div className="p-10 lg:p-14 bg-gradient-to-r from-white/3 via-black/40 to-white/5 border-t border-white/5 flex flex-col lg:flex-row items-center justify-between gap-6">
+        {/* Footer - Tech Stack + CTAs */}
+        <div className="p-12 lg:p-16 bg-gradient-to-r from-white/[0.02] via-black/40 to-white/[0.03] border-t border-white/[0.04] flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="flex flex-wrap justify-center gap-2 max-w-2xl">
             {project.tech.map((tech) => (
-              <span key={tech} className="px-3 py-1.5 text-xs font-medium bg-zinc-800 text-zinc-400 rounded-full">
+              <span key={tech} className="px-3.5 py-1.5 text-xs font-medium bg-zinc-800/80 text-zinc-400 rounded-full border border-zinc-700/50">
                 {tech}
               </span>
             ))}
           </div>
           <div className="flex gap-4">
             {project.demoUrl && (
-              <motion.a
+              <a
                 href={project.demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                className="btn-primary flex items-center gap-2"
+                className="btn-primary flex items-center gap-2.5 group"
               >
-                <Play className="w-4 h-4" />
+                <Play className="w-4 h-4 transition-transform duration-200 group-hover:scale-110" />
                 Live Demo
-              </motion.a>
+              </a>
             )}
             {project.githubUrl && (
-              <motion.a
+              <a
                 href={project.githubUrl}
-                whileHover={{ scale: 1.05 }}
-                className="btn-secondary flex items-center gap-2"
+                className="btn-secondary flex items-center gap-2.5 group"
               >
-                <Github className="w-4 h-4" />
+                <Github className="w-4 h-4 transition-transform duration-200 group-hover:scale-105" />
                 Source
-              </motion.a>
+              </a>
             )}
           </div>
         </div>

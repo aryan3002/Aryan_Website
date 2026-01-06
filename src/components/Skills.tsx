@@ -89,20 +89,20 @@ export default function Skills() {
       ref={ref}
       className="relative min-h-screen flex items-center py-32 lg:py-40 overflow-hidden"
     >
-      <div className="absolute inset-0 grid-pattern opacity-20" />
+      <div className="absolute inset-0 grid-pattern opacity-15" />
       
       <div className="container flex flex-col items-center">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 12 }}
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.45 }}
+          transition={{ duration: 0.6, ease: [0.2, 0.9, 0.3, 1] }}
           className="text-center mb-20"
         >
           <span className="text-xs uppercase tracking-[0.3em] text-zinc-500 mb-6 block">
             Capabilities
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold gradient-text mb-8">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold gradient-text mb-8 tracking-[-0.02em]">
             Technology Stack
           </h2>
           <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto leading-relaxed">
@@ -110,28 +110,26 @@ export default function Skills() {
           </p>
         </motion.div>
 
-        {/* Category Tabs */}
+        {/* Category Tabs - Refined */}
         <motion.div
-          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 12 }}
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.45, delay: 0.1 }}
-          className="flex flex-wrap justify-center gap-4 mb-16"
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.2, 0.9, 0.3, 1] }}
+          className="flex flex-wrap justify-center gap-3 mb-16"
         >
           {categories.map((cat, index) => (
-            <motion.button
+            <button
               key={cat.title}
               onClick={() => setActiveCategory(index)}
-              whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
-              whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
-              className={`px-8 py-3.5 rounded-full text-sm font-semibold transition-all duration-300 relative z-10 ${
+              className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-200 ease-[cubic-bezier(0.2,0.9,0.3,1)] relative z-10 ${
                 activeCategory === index
-                  ? "bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg shadow-indigo-500/30"
-                  : "glass text-zinc-400 hover:text-white hover:border-indigo-500/30"
+                  ? "bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg shadow-indigo-500/25"
+                  : "bg-white/[0.03] border border-white/[0.06] text-zinc-400 hover:text-white hover:bg-white/[0.06] hover:border-white/[0.1]"
               }`}
               style={{ cursor: 'pointer' }}
             >
               {cat.title}
-            </motion.button>
+            </button>
           ))}
         </motion.div>
 
@@ -141,43 +139,44 @@ export default function Skills() {
             key={activeCategory}
             initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 12 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: shouldReduceMotion ? 0 : -12 }}
-            transition={{ duration: 0.3 }}
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-5xl mx-auto"
+            exit={{ opacity: 0, y: shouldReduceMotion ? 0 : -8 }}
+            transition={{ duration: 0.25, ease: [0.2, 0.9, 0.3, 1] }}
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 max-w-5xl mx-auto"
           >
             {categories[activeCategory].skills.map((skill, index) => (
               <motion.div
                 key={skill.name}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.3, delay: index * 0.03 }}
-                whileHover={shouldReduceMotion ? {} : { y: -8, scale: 1.05 }}
+                transition={{ duration: 0.25, delay: index * 0.03, ease: [0.2, 0.9, 0.3, 1] }}
                 onMouseEnter={() => setHoveredSkill(skill.name)}
                 onMouseLeave={() => setHoveredSkill(null)}
                 className="relative group"
               >
                 <div
-                  className={`card text-center cursor-pointer
-                    ${hoveredSkill === skill.name ? "border-indigo-500/40" : ""}`}
+                  className={`p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] text-center cursor-pointer
+                    transition-all duration-200 ease-[cubic-bezier(0.2,0.9,0.3,1)]
+                    hover:bg-white/[0.04] hover:border-indigo-400/25 hover:-translate-y-1
+                    ${hoveredSkill === skill.name ? "border-indigo-400/30" : ""}`}
                 >
-                  <h4 className="font-semibold text-white mb-2">{skill.name}</h4>
+                  <h4 className="font-semibold text-white mb-2.5 tracking-[-0.01em]">{skill.name}</h4>
                   
                   {/* Progress Bar */}
-                  <div className="h-1 bg-zinc-800 rounded-full overflow-hidden mb-3">
+                  <div className="h-1 bg-zinc-800/80 rounded-full overflow-hidden mb-3">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: `${skill.level}%` }}
-                      transition={{ duration: 0.6, delay: 0.1 + index * 0.03 }}
+                      transition={{ duration: 0.7, delay: 0.1 + index * 0.03, ease: [0.2, 0.9, 0.3, 1] }}
                       className={`h-full bg-gradient-to-r ${categories[activeCategory].color} rounded-full`}
                     />
                   </div>
                   
                   <p className="text-xs text-zinc-500">{skill.context}</p>
                   
-                  {/* Glow on hover */}
+                  {/* Subtle glow on hover */}
                   <div
                     className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${categories[activeCategory].color} 
-                      opacity-0 group-hover:opacity-5 transition-opacity pointer-events-none`}
+                      opacity-0 group-hover:opacity-[0.03] transition-opacity duration-200 pointer-events-none`}
                   />
                 </div>
               </motion.div>

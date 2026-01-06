@@ -90,16 +90,23 @@ body {
   background: rgba(255, 255, 255, 0.02);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
   padding: 32px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 
+    transform 250ms cubic-bezier(0.2, 0.9, 0.3, 1),
+    background 250ms cubic-bezier(0.2, 0.9, 0.3, 1),
+    border-color 250ms cubic-bezier(0.2, 0.9, 0.3, 1),
+    box-shadow 250ms cubic-bezier(0.2, 0.9, 0.3, 1);
 }
 
 .card:hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(99, 102, 241, 0.3);
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(99, 102, 241, 0.2);
   transform: translateY(-2px);
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.2),
+    0 0 40px rgba(99, 102, 241, 0.04);
 }
 
 /* Glassmorphism base - reduced blur */
@@ -278,52 +285,191 @@ body {
 
 /* Card hover effect */
 .card-hover {
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: 
+    transform 250ms cubic-bezier(0.2, 0.9, 0.3, 1),
+    box-shadow 250ms cubic-bezier(0.2, 0.9, 0.3, 1),
+    border-color 250ms cubic-bezier(0.2, 0.9, 0.3, 1);
 }
 
 .card-hover:hover {
-  transform: translateY(-8px);
+  transform: translateY(-4px);
   box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.4),
-    0 0 60px rgba(99, 102, 241, 0.1);
-  border-color: rgba(99, 102, 241, 0.3);
+    0 12px 32px rgba(0, 0, 0, 0.25),
+    0 0 48px rgba(99, 102, 241, 0.06);
+  border-color: rgba(99, 102, 241, 0.2);
 }
 
-/* Button styles */
+/* Spatial depth layers */
+.depth-layer-1 {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.depth-layer-2 {
+  transform: translateZ(20px);
+  will-change: transform;
+}
+
+.depth-layer-3 {
+  transform: translateZ(40px);
+  will-change: transform;
+}
+
+/* Ambient light animation */
+@keyframes ambient-float {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.5;
+  }
+  33% {
+    transform: translate(-45%, -55%) scale(1.05);
+    opacity: 0.6;
+  }
+  66% {
+    transform: translate(-55%, -45%) scale(0.95);
+    opacity: 0.45;
+  }
+}
+
+@keyframes ambient-pulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+/* Micro-interaction utilities */
+.micro-lift {
+  transition: transform 150ms cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.micro-lift:hover {
+  transform: translateY(-1px);
+}
+
+.micro-scale {
+  transition: transform 150ms cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.micro-scale:hover {
+  transform: scale(1.02);
+}
+
+.micro-glow {
+  transition: box-shadow 200ms cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.micro-glow:hover {
+  box-shadow: 0 0 24px rgba(99, 102, 241, 0.15);
+}
+
+/* Premium Button System - Refined for tactile feel */
 .btn-primary {
+  --btn-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--btn-height);
+  padding: 0 32px;
   background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
   color: white;
-  padding: 16px 40px;
-  border-radius: 50px;
+  border-radius: 14px;
   font-weight: 500;
   font-size: 15px;
-  transition: all 0.3s ease;
+  letter-spacing: -0.01em;
   border: none;
   cursor: pointer;
-  min-width: 180px;
+  min-width: 160px;
+  position: relative;
+  overflow: hidden;
+  transition: 
+    transform 200ms cubic-bezier(0.2, 0.9, 0.3, 1),
+    box-shadow 200ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.2),
+    0 4px 12px rgba(99, 102, 241, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 200ms cubic-bezier(0.2, 0.9, 0.3, 1);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 40px rgba(99, 102, 241, 0.4);
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.2),
+    0 8px 24px rgba(99, 102, 241, 0.35),
+    0 0 0 1px rgba(99, 102, 241, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.btn-primary:hover::before {
+  opacity: 1;
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(99, 102, 241, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.btn-primary:focus-visible {
+  outline: none;
+  box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.2),
+    0 4px 12px rgba(99, 102, 241, 0.2),
+    0 0 0 3px rgba(99, 102, 241, 0.4);
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.05);
+  --btn-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--btn-height);
+  padding: 0 32px;
+  background: rgba(255, 255, 255, 0.04);
   color: white;
-  padding: 16px 40px;
-  border-radius: 50px;
+  border-radius: 14px;
   font-weight: 500;
   font-size: 15px;
-  transition: all 0.3s ease;
+  letter-spacing: -0.01em;
   border: 1px solid rgba(255, 255, 255, 0.1);
   cursor: pointer;
-  min-width: 180px;
+  min-width: 160px;
+  position: relative;
+  transition: 
+    transform 200ms cubic-bezier(0.2, 0.9, 0.3, 1),
+    background 200ms cubic-bezier(0.2, 0.9, 0.3, 1),
+    border-color 200ms cubic-bezier(0.2, 0.9, 0.3, 1),
+    box-shadow 200ms cubic-bezier(0.2, 0.9, 0.3, 1);
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.btn-secondary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
 }
 
 /* Magnetic button effect class */
