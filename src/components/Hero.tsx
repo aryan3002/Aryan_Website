@@ -77,9 +77,10 @@ export default function Hero() {
       {/* Main Content */}
       <motion.div
         style={shouldReduceMotion ? {} : { y, opacity, scale }}
-        className="relative z-10 w-full"
+        className="relative z-10 w-full max-w-none"
       >
-        <div className="container mx-auto px-6 text-center" style={{ maxWidth: '1100px' }}>
+        <div className="w-full px-6 sm:px-8 lg:px-16 xl:px-24 text-center">
+          <div className="max-w-[1000px] mx-auto">
         {/* Status Badge */}
         <motion.div
           initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
@@ -161,6 +162,7 @@ export default function Hero() {
             View Resume
           </a>
         </motion.div>
+          </div>
         </div>
       </motion.div>
 

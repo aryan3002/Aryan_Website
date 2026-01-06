@@ -26,9 +26,11 @@ export default function Contact() {
     <section
       id="contact"
       ref={ref}
-      className="relative min-h-screen flex items-center py-32 lg:py-40 overflow-hidden"
+      className="relative min-h-screen flex items-center py-32 lg:py-40 overflow-hidden w-full"
     >
-      <div className="absolute inset-0 grid-pattern opacity-20" />
+      {/* Edge-to-edge gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-rose-950/5 to-black" />
+      <div className="absolute inset-0 grid-pattern opacity-10" />
       
       {/* Gradient Orb - reduced opacity */}
       <motion.div
@@ -37,7 +39,7 @@ export default function Contact() {
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-r from-indigo-500/10 to-purple-500/10 blur-3xl pointer-events-none"
       />
 
-      <div className="container relative z-10 flex flex-col items-center">
+      <div className="relative z-10 w-full max-w-none px-6 sm:px-8 lg:px-12 xl:px-16 flex flex-col items-center">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 12 }}
@@ -91,7 +93,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="glass rounded-3xl p-8 lg:p-12"
+          className="glass rounded-3xl p-8 lg:p-12 w-full max-w-2xl"
         >
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid md:grid-cols-2 gap-6">

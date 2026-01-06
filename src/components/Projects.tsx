@@ -290,8 +290,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           ${expanded ? "border-indigo-500/40" : ""}`}
         onClick={() => setExpanded(!expanded)}
       >
-        <div className="p-8 lg:p-10">
-          <div className="flex items-start justify-between mb-6">
+        <div className="p-10 lg:p-12">
+          <div className="flex items-start justify-between mb-8">
             <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${project.color} flex items-center justify-center transition-transform ${shouldReduceMotion ? "" : "group-hover:scale-110 group-hover:rotate-3"}`}>
               <Zap className="w-5 h-5 text-white" />
             </div>
@@ -317,8 +317,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             </div>
           </div>
 
-          <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
-          <p className="text-zinc-400 text-sm mb-4">{project.tagline}</p>
+          <h3 className="text-xl font-semibold text-white mb-3">{project.title}</h3>
+          <p className="text-zinc-400 text-sm mb-6 leading-relaxed">{project.tagline}</p>
 
           <button className="flex items-center gap-2 text-sm text-zinc-500 hover:text-white transition-colors">
             <span>{expanded ? "Collapse" : "Learn more"}</span>
@@ -337,7 +337,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               transition={{ duration: 0.3 }}
               className="border-t border-zinc-800/50 overflow-hidden"
             >
-              <div className="p-6 lg:p-8 space-y-4">
+              <div className="p-8 lg:p-10 space-y-6">
                 <p className="text-zinc-400">{project.description}</p>
                 <div className="flex flex-wrap gap-2 pt-4 border-t border-zinc-800/50">
                   {project.tech.map((tech) => (
@@ -367,11 +367,13 @@ export default function Projects() {
     <section
       id="projects"
       ref={ref}
-      className="relative min-h-screen flex items-center py-32 lg:py-40 overflow-hidden"
+      className="relative min-h-screen flex items-center py-32 lg:py-40 overflow-hidden w-full"
     >
-      <div className="absolute inset-0 grid-pattern opacity-20" />
+      {/* Edge-to-edge gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950/5 to-black" />
+      <div className="absolute inset-0 grid-pattern opacity-10" />
 
-      <div className="container w-full flex flex-col items-center">
+      <div className="relative z-10 w-full max-w-none px-6 sm:px-8 lg:px-12 xl:px-16 flex flex-col items-center">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 12 }}
@@ -393,8 +395,8 @@ export default function Projects() {
         {/* Hero Project */}
         <HeroProject project={heroProject} />
 
-        {/* Other Projects */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mt-20">
+        {/* Other Projects - Full width grid */}
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8 w-full max-w-[1600px] mx-auto mt-20">
           {otherProjects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}

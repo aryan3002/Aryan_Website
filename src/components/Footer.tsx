@@ -15,9 +15,12 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative border-t border-zinc-800/50">
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+    <footer className="relative border-t border-zinc-800/50 w-full">
+      {/* Edge-to-edge subtle gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/50 to-transparent pointer-events-none" />
+      
+      <div className="relative z-10 w-full max-w-none px-6 sm:px-8 lg:px-12 xl:px-16 py-12">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 max-w-[1600px] mx-auto">
           {/* Logo / Name */}
           <div className="flex items-center gap-2">
             <span className="text-xl font-bold gradient-text">AT</span>
@@ -48,7 +51,7 @@ export default function Footer() {
         </div>
 
         {/* Back to Top */}
-        <div className="flex justify-center mt-8">
+        <div className="flex justify-center mt-8 max-w-[1600px] mx-auto">
           <motion.button
             onClick={scrollToTop}
             whileHover={{ scale: 1.05 }}

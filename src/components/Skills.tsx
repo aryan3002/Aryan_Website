@@ -87,11 +87,13 @@ export default function Skills() {
     <section
       id="skills"
       ref={ref}
-      className="relative min-h-screen flex items-center py-32 lg:py-40 overflow-hidden"
+      className="relative min-h-screen flex items-center py-32 lg:py-40 overflow-hidden w-full"
     >
-      <div className="absolute inset-0 grid-pattern opacity-15" />
+      {/* Edge-to-edge background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-indigo-950/5 to-black" />
+      <div className="absolute inset-0 grid-pattern opacity-10" />
       
-      <div className="container flex flex-col items-center">
+      <div className="relative z-10 w-full max-w-none px-6 sm:px-8 lg:px-16 xl:px-24 flex flex-col items-center">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}

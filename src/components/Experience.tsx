@@ -41,11 +41,13 @@ export default function Experience() {
     <section
       id="experience"
       ref={ref}
-      className="relative min-h-screen flex items-center py-32 lg:py-40 overflow-hidden"
+      className="relative min-h-screen flex items-center py-32 lg:py-40 overflow-hidden w-full"
     >
-      <div className="absolute inset-0 grid-pattern opacity-20" />
+      {/* Edge-to-edge gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-emerald-950/5 to-black" />
+      <div className="absolute inset-0 grid-pattern opacity-10" />
 
-      <div className="container flex flex-col items-center">
+      <div className="relative z-10 w-full max-w-none px-6 sm:px-8 lg:px-12 xl:px-16 flex flex-col items-center">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 12 }}
@@ -65,7 +67,7 @@ export default function Experience() {
         </motion.div>
 
         {/* Timeline */}
-        <div className="space-y-12">
+        <div className="space-y-12 w-full max-w-[1200px]">
           {experiences.map((exp, index) => (
             <motion.div
               key={exp.role}

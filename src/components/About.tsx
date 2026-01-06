@@ -36,12 +36,14 @@ export default function About() {
     <section
       id="about"
       ref={ref}
-      className="relative min-h-screen flex items-center py-32 lg:py-40 overflow-hidden"
+      className="relative min-h-screen flex items-center py-32 lg:py-40 overflow-hidden w-full"
     >
-      {/* Background */}
-      <div className="absolute inset-0 grid-pattern opacity-20" />
+      {/* Edge-to-edge gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-zinc-950/50 to-black" />
+      <div className="absolute inset-0 grid-pattern opacity-10" />
       
-      <div className="container flex flex-col items-center">
+      <div className="relative z-10 w-full max-w-none px-6 sm:px-8 lg:px-16 xl:px-24">
+        <div className="max-w-[1400px] mx-auto">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
@@ -122,6 +124,7 @@ export default function About() {
               </motion.div>
             ))}
           </motion.div>
+        </div>
         </div>
       </div>
     </section>
