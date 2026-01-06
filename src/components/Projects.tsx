@@ -1,7 +1,12 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useInView, AnimatePresence, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useInView,
+  AnimatePresence,
+  useReducedMotion,
+} from "framer-motion";
 import {
   ExternalLink,
   Github,
@@ -42,12 +47,36 @@ const projects: Project[] = [
     description:
       "An agentic SaaS platform replacing traditional business websites with intelligent AI conversations. Features GPT-4 powered chat, voice AI via Twilio, and real-time scheduling.",
     features: [
-      { icon: MessageSquare, title: "Consumer GPT", description: "Natural language booking & inquiries" },
-      { icon: Mic, title: "Voice Agent", description: "Twilio-powered phone interactions" },
-      { icon: Users, title: "Owner GPT", description: "Business intelligence dashboard" },
-      { icon: Calendar, title: "Atomic Locking", description: "Real-time slot management" },
-      { icon: BarChart3, title: "Analytics", description: "LLM performance dashboards" },
-      { icon: Lock, title: "Enterprise Security", description: "SOC2-compliant handling" },
+      {
+        icon: MessageSquare,
+        title: "Consumer GPT",
+        description: "Natural language booking & inquiries",
+      },
+      {
+        icon: Mic,
+        title: "Voice Agent",
+        description: "Twilio-powered phone interactions",
+      },
+      {
+        icon: Users,
+        title: "Owner GPT",
+        description: "Business intelligence dashboard",
+      },
+      {
+        icon: Calendar,
+        title: "Atomic Locking",
+        description: "Real-time slot management",
+      },
+      {
+        icon: BarChart3,
+        title: "Analytics",
+        description: "LLM performance dashboards",
+      },
+      {
+        icon: Lock,
+        title: "Enterprise Security",
+        description: "SOC2-compliant handling",
+      },
     ],
     tech: ["Next.js", "GPT-4", "LangChain", "Twilio", "PostgreSQL", "Redis"],
     color: "from-indigo-500 to-purple-500",
@@ -62,8 +91,16 @@ const projects: Project[] = [
     description:
       "NLP pipeline extracting structured data from PDFs, enabling natural language SQL queries over unstructured information.",
     features: [
-      { icon: FileText, title: "Document Parsing", description: "Multi-format with OCR" },
-      { icon: Database, title: "Schema Generation", description: "Auto SQL schema creation" },
+      {
+        icon: FileText,
+        title: "Document Parsing",
+        description: "Multi-format with OCR",
+      },
+      {
+        icon: Database,
+        title: "Schema Generation",
+        description: "Auto SQL schema creation",
+      },
       { icon: Zap, title: "Real-time Queries", description: "NL to SQL translation" },
     ],
     tech: ["Python", "LangChain", "GPT-4", "PostgreSQL", "FastAPI"],
@@ -113,24 +150,14 @@ function HeroProject({ project }: { project: Project }) {
       initial={{ opacity: 0 }}
       animate={isInView ? { opacity: 1 } : {}}
       transition={{ duration: 1, ease: [0.2, 0.9, 0.3, 1] }}
-      className="relative w-full max-w-6xl mx-auto"
+      // margin-bottom creates clear gap before the small project cards
+      className="relative w-full max-w-6xl mx-auto mb-24"
     >
-      {/* Layered Glow System for Depth */}
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={isInView ? { opacity: 1, scale: 1 } : {}}
-        transition={{ duration: 1.2, ease: [0.2, 0.9, 0.3, 1] }}
-        className={`absolute -inset-4 bg-gradient-to-r ${project.color} opacity-[0.08] blur-[80px] rounded-[40px]`} 
-      />
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="absolute inset-0 bg-gradient-to-b from-white/[0.03] via-transparent to-black/50 rounded-[24px]" 
-      />
+      {/* 🔥 removed the huge absolute blurred glow so it doesn't wash everything out */}
 
-      <div className="relative overflow-hidden rounded-[24px] border border-white/[0.08] bg-gradient-to-b from-white/[0.04] via-black/50 to-black/90 shadow-2xl">
-        {/* Header - Product Reveal Style */}
+      {/* Featured card itself – still glassy, but less “giant pill in the middle” */}
+      <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.04] via-black/40 to-black/80 shadow-2xl">
+        {/* Header */}
         <div className="p-12 lg:p-16 text-center border-b border-white/[0.04]">
           <motion.div
             initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 24 }}
@@ -138,9 +165,9 @@ function HeroProject({ project }: { project: Project }) {
             transition={{ duration: 0.7, delay: 0.15, ease: [0.2, 0.9, 0.3, 1] }}
             className="space-y-6 flex flex-col items-center"
           >
-            {/* Refined Tags */}
+            {/* Tags */}
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] text-sm text-zinc-300 border border-white/[0.08] backdrop-blur-sm">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] text-sm text-zinc-300 border border-white/[0.06] backdrop-blur-sm">
                 <Sparkles className="w-4 h-4 text-indigo-400" />
                 Featured Project
               </span>
@@ -155,21 +182,22 @@ function HeroProject({ project }: { project: Project }) {
               </span>
             </div>
 
-            {/* Hero Title - Apple Product Style */}
-            <motion.h3 
+            {/* Title */}
+            <motion.h3
               initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.25, ease: [0.2, 0.9, 0.3, 1] }}
               className="text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-[-0.03em]"
               style={{
-                textShadow: '0 8px 32px rgba(99, 102, 241, 0.25), 0 2px 8px rgba(0, 0, 0, 0.5)'
+                textShadow:
+                  "0 8px 32px rgba(99, 102, 241, 0.25), 0 2px 8px rgba(0, 0, 0, 0.5)",
               }}
             >
               {project.title}
             </motion.h3>
 
-            {/* Tagline - Refined Typography */}
-            <motion.p 
+            {/* Tagline */}
+            <motion.p
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.35 }}
@@ -180,7 +208,7 @@ function HeroProject({ project }: { project: Project }) {
           </motion.div>
         </div>
 
-        {/* Description + Architecture Diagram */}
+        {/* Description + Architecture */}
         <div className="p-12 lg:p-16 border-b border-white/[0.04] flex flex-col items-center">
           <motion.p
             initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
@@ -190,7 +218,7 @@ function HeroProject({ project }: { project: Project }) {
           >
             {project.description}
           </motion.p>
-          
+
           {project.id === "convo" && (
             <motion.div
               initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
@@ -202,53 +230,65 @@ function HeroProject({ project }: { project: Project }) {
           )}
         </div>
 
-        {/* Features Grid - Refined Cards */}
+        {/* Features grid */}
         <div className="p-12 lg:p-16">
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.35 }}
-            className="grid md:grid-cols-2 gap-5"
+            className="grid md:grid-cols-2 gap-8"
           >
             {project.features.map((feature, i) => (
               <motion.div
                 key={feature.title}
                 initial={{ opacity: 0, y: 16 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.4 + i * 0.08, ease: [0.2, 0.9, 0.3, 1] }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.4 + i * 0.08,
+                  ease: [0.2, 0.9, 0.3, 1],
+                }}
                 className="group p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] 
-                           transition-all duration-250 ease-[cubic-bezier(0.2,0.9,0.3,1)]
-                           hover:bg-white/[0.04] hover:border-indigo-400/30"
+                           transition-all duration-200 hover:bg-white/[0.04]"
               >
-                <div className={`w-11 h-11 rounded-xl bg-gradient-to-r ${project.color} 
+                <div
+                  className={`w-11 h-11 rounded-xl bg-gradient-to-r ${project.color} 
                                 flex items-center justify-center mb-4 
-                                transition-transform duration-200 ease-[cubic-bezier(0.2,0.9,0.3,1)]
-                                group-hover:scale-105`}>
+                                transition-transform duration-200
+                                group-hover:scale-105`}
+                >
                   <feature.icon className="w-5 h-5 text-white" />
                 </div>
-                <h4 className="font-semibold text-white mb-1.5 tracking-[-0.01em]">{feature.title}</h4>
-                <p className="text-sm text-zinc-500 leading-relaxed">{feature.description}</p>
+                <h4 className="font-semibold text-white mb-1.5 tracking-[-0.01em]">
+                  {feature.title}
+                </h4>
+                <p className="text-sm text-zinc-500 leading-relaxed">
+                  {feature.description}
+                </p>
               </motion.div>
             ))}
           </motion.div>
         </div>
 
-        {/* Footer - Tech Stack + CTAs */}
-        <div className="p-12 lg:p-16 bg-gradient-to-r from-white/[0.02] via-black/40 to-white/[0.03] border-t border-white/[0.04] flex flex-col lg:flex-row items-center justify-between gap-8">
+        {/* Footer – more breathing room around the buttons */}
+        <div className="p-14 lg:p-18 bg-gradient-to-r from-white/[0.02] via-black/40 to-white/[0.03] border-t border-white/[0.04] flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="flex flex-wrap justify-center gap-2 max-w-2xl">
             {project.tech.map((tech) => (
-              <span key={tech} className="px-3.5 py-1.5 text-xs font-medium bg-zinc-800/80 text-zinc-400 rounded-full border border-zinc-700/50">
+              <span
+                key={tech}
+                className="px-3.5 py-1.5 text-xs font-medium bg-zinc-800/80 text-zinc-400 rounded-full border border-zinc-700/50"
+              >
                 {tech}
               </span>
             ))}
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-4 mt-6 lg:mt-0">
             {project.demoUrl && (
               <a
                 href={project.demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary flex items-center gap-2.5 group"
+                className="btn-primary flex items-center gap-2.5 px-5 py-3 group"
               >
                 <Play className="w-4 h-4 transition-transform duration-200 group-hover:scale-110" />
                 Live Demo
@@ -257,7 +297,7 @@ function HeroProject({ project }: { project: Project }) {
             {project.githubUrl && (
               <a
                 href={project.githubUrl}
-                className="btn-secondary flex items-center gap-2.5 group"
+                className="btn-secondary flex items-center gap-2.5 px-5 py-3 group"
               >
                 <Github className="w-4 h-4 transition-transform duration-200 group-hover:scale-105" />
                 Source
@@ -292,7 +332,13 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       >
         <div className="p-10 lg:p-12">
           <div className="flex items-start justify-between mb-8">
-            <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${project.color} flex items-center justify-center transition-transform ${shouldReduceMotion ? "" : "group-hover:scale-110 group-hover:rotate-3"}`}>
+            <div
+              className={`w-12 h-12 rounded-lg bg-gradient-to-r ${project.color} flex items-center justify-center transition-transform ${
+                shouldReduceMotion
+                  ? ""
+                  : "group-hover:scale-110 group-hover:rotate-3"
+              }`}
+            >
               <Zap className="w-5 h-5 text-white" />
             </div>
             <div className="flex gap-2">
@@ -317,8 +363,12 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             </div>
           </div>
 
-          <h3 className="text-xl font-semibold text-white mb-3">{project.title}</h3>
-          <p className="text-zinc-400 text-sm mb-6 leading-relaxed">{project.tagline}</p>
+          <h3 className="text-xl font-semibold text-white mb-3">
+            {project.title}
+          </h3>
+          <p className="text-zinc-400 text-sm mb-6 leading-relaxed">
+            {project.tagline}
+          </p>
 
           <button className="flex items-center gap-2 text-sm text-zinc-500 hover:text-white transition-colors">
             <span>{expanded ? "Collapse" : "Learn more"}</span>
@@ -341,7 +391,10 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 <p className="text-zinc-400">{project.description}</p>
                 <div className="flex flex-wrap gap-2 pt-4 border-t border-zinc-800/50">
                   {project.tech.map((tech) => (
-                    <span key={tech} className="px-3 py-1 text-xs bg-zinc-800 text-zinc-400 rounded-full">
+                    <span
+                      key={tech}
+                      className="px-3 py-1 text-xs bg-zinc-800 text-zinc-400 rounded-full"
+                    >
                       {tech}
                     </span>
                   ))}
@@ -373,7 +426,7 @@ export default function Projects() {
       <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950/5 to-black" />
       <div className="absolute inset-0 grid-pattern opacity-10" />
 
-      <div className="relative z-10 w-full max-w-none px-6 sm:px-8 lg:px-12 xl:px-16 flex flex-col items-center">
+      <div className="relative z-10 w-full px-6 sm:px-8 lg:px-12 xl:px-16 flex flex-col items-center">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 12 }}
@@ -388,15 +441,16 @@ export default function Projects() {
             Built Different
           </h2>
           <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-            Each project is a product. Engineered with precision, designed with intent.
+            Each project is a product. Engineered with precision, designed with
+            intent.
           </p>
         </motion.div>
 
-        {/* Hero Project */}
+        {/* Featured project */}
         <HeroProject project={heroProject} />
 
-        {/* Other Projects - Full width grid */}
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8 w-full max-w-[1600px] mx-auto mt-20">
+        {/* Smaller project cards – now clearly separated by the mb-24 above */}
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8 w-full max-w-[1600px] mx-auto">
           {otherProjects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}

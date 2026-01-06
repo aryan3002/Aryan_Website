@@ -4,6 +4,8 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { ArrowDown, Sparkles, FileText } from "lucide-react";
 import AmbientLight from "./AmbientLight";
+import CurvedLoop from "./CurvedLoop";
+import LiquidEther from "./LiquidEther";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -74,13 +76,53 @@ export default function Hero() {
         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
       }} />
 
+      {/* Liquid Ether Background Effect - Full Screen */}
+      <div className="fixed inset-0" style={{ zIndex: 1 }}>
+        <LiquidEther
+          colors={['#5227FF', '#FF9FFC', '#B19EEF']}
+          mouseForce={20}
+          cursorSize={100}
+          isViscous={false}
+          viscous={30}
+          iterationsViscous={32}
+          iterationsPoisson={32}
+          resolution={0.5}
+          isBounce={false}
+          autoDemo={true}
+          autoSpeed={0.5}
+          autoIntensity={2.2}
+          takeoverDuration={0.25}
+          autoResumeDelay={3000}
+          autoRampDuration={0.6}
+          style={{ width: '100vw', height: '100vh' }}
+        />
+      </div>
+
+
       {/* Main Content */}
       <motion.div
         style={shouldReduceMotion ? {} : { y, opacity, scale }}
-        className="relative z-10 w-full max-w-none"
+        className="relative z-10 w-full max-w-none pointer-events-none"
       >
-        <div className="w-full px-6 sm:px-8 lg:px-16 xl:px-24 text-center">
+        <div className="w-full px-6 sm:px-8 lg:px-16 xl:px-24 text-center pointer-events-auto">
           <div className="max-w-[1000px] mx-auto">
+        {/* Curved Loop Text */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.2, 0.9, 0.3, 1] }}
+          className="mb-16 -mx-6"
+        >
+          <CurvedLoop 
+            marqueeText="OPEN TO WORK ✦ " 
+            speed={1.5}
+            curveAmount={300}
+            className="fill-transparent stroke-indigo-400/40"
+          />
+        </motion.div>
+
+         
+
         {/* Status Badge */}
         <motion.div
           initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
