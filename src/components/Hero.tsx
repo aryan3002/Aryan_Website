@@ -27,21 +27,47 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-radial from-zinc-900/30 via-black to-black" />
       </div>
 
-      {/* Ambient Light Spheres - Spatial Depth */}
-      <AmbientLight 
-        position={{ x: 65, y: 25 }} 
-        color="99, 102, 241" 
-        size={800} 
-        intensity={0.08}
-        duration={25}
-      />
-      <AmbientLight 
-        position={{ x: 30, y: 70 }} 
-        color="139, 92, 246" 
-        size={600} 
-        intensity={0.05}
-        duration={30}
-      />
+      {/* Ambient Light Spheres - Spatial Depth with floating animation */}
+      <motion.div
+        animate={shouldReduceMotion ? {} : {
+          y: [0, -20, 0],
+          opacity: [0.08, 0.12, 0.08],
+        }}
+        transition={{
+          duration: 15,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      >
+        <AmbientLight 
+          position={{ x: 65, y: 25 }} 
+          color="99, 102, 241" 
+          size={900} 
+          intensity={0.12}
+          duration={20}
+        />
+      </motion.div>
+      <motion.div
+        animate={shouldReduceMotion ? {} : {
+          y: [0, 15, 0],
+          x: [0, -10, 0],
+          opacity: [0.05, 0.08, 0.05],
+        }}
+        transition={{
+          duration: 18,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2,
+        }}
+      >
+        <AmbientLight 
+          position={{ x: 30, y: 70 }} 
+          color="139, 92, 246" 
+          size={700} 
+          intensity={0.08}
+          duration={25}
+        />
+      </motion.div>
 
       {/* Subtle noise texture for depth */}
       <div className="absolute inset-0 opacity-[0.015]" style={{

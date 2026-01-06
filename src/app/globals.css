@@ -11,13 +11,6 @@
   --glow: rgba(99, 102, 241, 0.5);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -85,7 +78,7 @@ body {
   }
 }
 
-/* Unified Card Style */
+/* Unified Card Style - Enhanced */
 .card {
   background: rgba(255, 255, 255, 0.02);
   backdrop-filter: blur(8px);
@@ -93,6 +86,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 20px;
   padding: 32px;
+  position: relative;
   transition: 
     transform 250ms cubic-bezier(0.2, 0.9, 0.3, 1),
     background 250ms cubic-bezier(0.2, 0.9, 0.3, 1),
@@ -100,13 +94,32 @@ body {
     box-shadow 250ms cubic-bezier(0.2, 0.9, 0.3, 1);
 }
 
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(139, 92, 246, 0.3));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 250ms cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
 .card:hover {
-  background: rgba(255, 255, 255, 0.035);
-  border-color: rgba(99, 102, 241, 0.2);
-  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(99, 102, 241, 0.3);
+  transform: translateY(-4px);
   box-shadow: 
-    0 4px 24px rgba(0, 0, 0, 0.2),
-    0 0 40px rgba(99, 102, 241, 0.04);
+    0 8px 32px rgba(0, 0, 0, 0.25),
+    0 0 60px rgba(99, 102, 241, 0.1);
+}
+
+.card:hover::before {
+  opacity: 1;
 }
 
 /* Glassmorphism base - reduced blur */
@@ -365,111 +378,219 @@ body {
   box-shadow: 0 0 24px rgba(99, 102, 241, 0.15);
 }
 
-/* Premium Button System - Refined for tactile feel */
+/* Premium Button System - Enhanced WOW Factor */
 .btn-primary {
-  --btn-height: 52px;
+  --btn-height: 54px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   height: var(--btn-height);
-  padding: 0 32px;
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  padding: 0 36px;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+  background-size: 200% 200%;
   color: white;
-  border-radius: 14px;
-  font-weight: 500;
+  border-radius: 16px;
+  font-weight: 600;
   font-size: 15px;
   letter-spacing: -0.01em;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   cursor: pointer;
-  min-width: 160px;
+  min-width: 180px;
   position: relative;
   overflow: hidden;
   transition: 
     transform 200ms cubic-bezier(0.2, 0.9, 0.3, 1),
-    box-shadow 200ms cubic-bezier(0.2, 0.9, 0.3, 1);
+    box-shadow 200ms cubic-bezier(0.2, 0.9, 0.3, 1),
+    background-position 600ms cubic-bezier(0.2, 0.9, 0.3, 1);
   box-shadow: 
-    0 1px 2px rgba(0, 0, 0, 0.2),
-    0 4px 12px rgba(99, 102, 241, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    0 2px 8px rgba(0, 0, 0, 0.15),
+    0 8px 24px rgba(99, 102, 241, 0.25),
+    0 0 0 1px rgba(99, 102, 241, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 }
 
 .btn-primary::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
   opacity: 0;
   transition: opacity 200ms cubic-bezier(0.2, 0.9, 0.3, 1);
 }
 
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7);
+  border-radius: 17px;
+  opacity: 0;
+  z-index: -1;
+  filter: blur(12px);
+  transition: opacity 200ms cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
 .btn-primary:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.02);
+  background-position: 100% 50%;
   box-shadow: 
-    0 2px 4px rgba(0, 0, 0, 0.2),
-    0 8px 24px rgba(99, 102, 241, 0.35),
-    0 0 0 1px rgba(99, 102, 241, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    0 12px 40px rgba(99, 102, 241, 0.45),
+    0 0 0 1px rgba(139, 92, 246, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.15);
 }
 
 .btn-primary:hover::before {
   opacity: 1;
 }
 
+.btn-primary:hover::after {
+  opacity: 0.6;
+}
+
 .btn-primary:active {
-  transform: translateY(0);
+  transform: translateY(-1px) scale(1);
   box-shadow: 
-    0 1px 2px rgba(0, 0, 0, 0.3),
-    0 2px 8px rgba(99, 102, 241, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    0 2px 4px rgba(0, 0, 0, 0.25),
+    0 4px 16px rgba(99, 102, 241, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .btn-primary:focus-visible {
   outline: none;
   box-shadow: 
-    0 1px 2px rgba(0, 0, 0, 0.2),
-    0 4px 12px rgba(99, 102, 241, 0.2),
-    0 0 0 3px rgba(99, 102, 241, 0.4);
+    0 2px 8px rgba(0, 0, 0, 0.15),
+    0 8px 24px rgba(99, 102, 241, 0.25),
+    0 0 0 4px rgba(99, 102, 241, 0.3);
 }
 
+
 .btn-secondary {
-  --btn-height: 52px;
+  --btn-height: 54px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   height: var(--btn-height);
-  padding: 0 32px;
-  background: rgba(255, 255, 255, 0.04);
+  padding: 0 36px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   color: white;
-  border-radius: 14px;
-  font-weight: 500;
+  border-radius: 16px;
+  font-weight: 600;
   font-size: 15px;
   letter-spacing: -0.01em;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
   cursor: pointer;
-  min-width: 160px;
+  min-width: 180px;
   position: relative;
   transition: 
     transform 200ms cubic-bezier(0.2, 0.9, 0.3, 1),
     background 200ms cubic-bezier(0.2, 0.9, 0.3, 1),
     border-color 200ms cubic-bezier(0.2, 0.9, 0.3, 1),
     box-shadow 200ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.btn-secondary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 15px;
+  padding: 1.5px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 200ms cubic-bezier(0.2, 0.9, 0.3, 1);
 }
 
 .btn-secondary:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px) scale(1.01);
   background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.15),
+    0 0 24px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.btn-secondary:hover::before {
+  opacity: 1;
 }
 
 .btn-secondary:active {
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
   background: rgba(255, 255, 255, 0.06);
 }
 
 .btn-secondary:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.15);
+}
+
+/* Enhanced "Let's Talk" CTA in Navigation */
+.nav-cta {
+  --btn-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--btn-height);
+  padding: 0 28px;
+  background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+  color: #000000;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: 
+    transform 180ms cubic-bezier(0.2, 0.9, 0.3, 1),
+    box-shadow 180ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.1),
+    0 4px 16px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.nav-cta::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(241,245,249,0.8));
+  border-radius: 16px;
+  opacity: 0;
+  z-index: -1;
+  filter: blur(8px);
+  transition: opacity 180ms cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.nav-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    0 8px 24px rgba(255, 255, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.nav-cta:hover::after {
+  opacity: 0.8;
+}
+
+.nav-cta:active {
+  transform: scale(0.97);
+  box-shadow: 
+    0 1px 4px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 /* Magnetic button effect class */

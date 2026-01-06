@@ -56,14 +56,14 @@ export default function CursorGlow() {
         }}
       >
         <motion.div
-          className="absolute w-[500px] h-[500px] rounded-full"
+          className="absolute w-[600px] h-[600px] rounded-full"
           style={{
             x: smoothX,
             y: smoothY,
             translateX: "-50%",
             translateY: "-50%",
-            background: `radial-gradient(circle at center, rgba(99, 102, 241, 0.06) 0%, rgba(99, 102, 241, 0.02) 35%, transparent 60%)`,
-            filter: "blur(1px)",
+            background: `radial-gradient(circle at center, rgba(99, 102, 241, 0.12) 0%, rgba(99, 102, 241, 0.04) 35%, transparent 60%)`,
+            filter: "blur(2px)",
           }}
         />
       </motion.div>
@@ -72,18 +72,18 @@ export default function CursorGlow() {
       <motion.div
         className="pointer-events-none fixed inset-0 z-20"
         style={{
-          opacity: isVisible ? 0.5 : 0,
+          opacity: isVisible ? 0.7 : 0,
           transition: "opacity 0.4s ease",
         }}
       >
         <motion.div
-          className="absolute w-[800px] h-[800px] rounded-full"
+          className="absolute w-[900px] h-[900px] rounded-full"
           style={{
             x: smoothX,
             y: smoothY,
             translateX: "-50%",
             translateY: "-50%",
-            background: `radial-gradient(circle at center, rgba(139, 92, 246, 0.03) 0%, transparent 50%)`,
+            background: `radial-gradient(circle at center, rgba(139, 92, 246, 0.06) 0%, transparent 50%)`,
             filter: "blur(40px)",
           }}
         />

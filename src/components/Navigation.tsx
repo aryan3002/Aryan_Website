@@ -75,10 +75,7 @@ export default function Navigation() {
               >
                 <Link
                   href="#contact"
-                  className="ml-6 px-7 py-2.5 text-sm font-semibold bg-white text-black rounded-full 
-                           transition-all duration-200 ease-[cubic-bezier(0.2,0.9,0.3,1)]
-                           hover:bg-zinc-100 hover:shadow-lg hover:shadow-white/10
-                           active:scale-[0.98]"
+                  className="ml-6 nav-cta"
                 >
                   Let&apos;s Talk
                 </Link>
