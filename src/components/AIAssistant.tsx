@@ -82,21 +82,26 @@ export default function AIAssistant() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-24 right-6 z-50 w-[360px] max-w-[calc(100vw-48px)] glass rounded-2xl overflow-hidden shadow-2xl"
+            className="fixed bottom-24 right-6 z-50 w-[420px] max-w-[calc(100vw-48px)] bg-zinc-900/95 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl border border-zinc-800"
           >
             {/* Header */}
-            <div className="p-4 border-b border-zinc-800 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-white text-sm">Aryan&apos;s AI</h3>
-                <p className="text-xs text-zinc-500">Ask me anything</p>
+            <div className="px-6 py-5 border-b border-zinc-800/80 bg-gradient-to-r from-indigo-500/10 via-purple-500/5 to-transparent">
+              <div className="flex items-center gap-4">
+                <div className="relative">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                    <Sparkles className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-zinc-900" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-white text-base">Aryan&apos;s AI</h3>
+                  <p className="text-xs text-zinc-400">Ask me anything</p>
+                </div>
               </div>
             </div>
 
             {/* Messages */}
-            <div className="h-80 overflow-y-auto p-4 space-y-3">
+            <div className="h-96 overflow-y-auto p-6 space-y-4 bg-zinc-950/50">
               {messages.map((msg, i) => (
                 <motion.div
                   key={i}
@@ -105,10 +110,10 @@ export default function AIAssistant() {
                   className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                 >
                   <div
-                    className={`max-w-[80%] px-4 py-2.5 rounded-2xl text-sm ${
+                    className={`max-w-[85%] px-5 py-3.5 rounded-2xl text-sm leading-relaxed shadow-md ${
                       msg.role === "user"
-                        ? "bg-indigo-500 text-white rounded-br-md"
-                        : "bg-zinc-800 text-zinc-300 rounded-bl-md"
+                        ? "bg-gradient-to-br from-indigo-500 to-indigo-600 text-white rounded-br-md"
+                        : "bg-zinc-800/90 text-zinc-100 rounded-bl-md border border-zinc-700/50"
                     }`}
                   >
                     {msg.content}
@@ -117,13 +122,24 @@ export default function AIAssistant() {
               ))}
               {isTyping && (
                 <div className="flex justify-start">
-                  <div className="bg-zinc-800 text-zinc-400 px-4 py-2.5 rounded-2xl rounded-bl-md text-sm">
-                    <motion.span
-                      animate={{ opacity: [0.4, 1, 0.4] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                      Typing...
-                    </motion.span>
+                  <div className="bg-zinc-800/90 border border-zinc-700/50 text-zinc-400 px-5 py-3.5 rounded-2xl rounded-bl-md text-sm shadow-md">
+                    <motion.div className="flex gap-1">
+                      <motion.span
+                        animate={{ opacity: [0.4, 1, 0.4] }}
+                        transition={{ duration: 1.2, repeat: Infinity, delay: 0 }}
+                        className="w-2 h-2 bg-zinc-500 rounded-full"
+                      />
+                      <motion.span
+                        animate={{ opacity: [0.4, 1, 0.4] }}
+                        transition={{ duration: 1.2, repeat: Infinity, delay: 0.2 }}
+                        className="w-2 h-2 bg-zinc-500 rounded-full"
+                      />
+                      <motion.span
+                        animate={{ opacity: [0.4, 1, 0.4] }}
+                        transition={{ duration: 1.2, repeat: Infinity, delay: 0.4 }}
+                        className="w-2 h-2 bg-zinc-500 rounded-full"
+                      />
+                    </motion.div>
                   </div>
                 </div>
               )}
@@ -131,21 +147,23 @@ export default function AIAssistant() {
             </div>
 
             {/* Input */}
-            <form onSubmit={handleSubmit} className="p-4 border-t border-zinc-800">
-              <div className="flex gap-2">
+            <form onSubmit={handleSubmit} className="p-5 border-t border-zinc-800/80 bg-zinc-900/80">
+              <div className="flex gap-3">
                 <input
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Ask about skills, projects..."
-                  className="flex-1 bg-zinc-900 text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-indigo-500/50 placeholder:text-zinc-600"
+                  className="flex-1 bg-zinc-800/60 text-white rounded-2xl px-5 py-3.5 text-sm outline-none focus:ring-2 focus:ring-indigo-500/50 placeholder:text-zinc-500 border border-zinc-700/50 transition-all"
                 />
-                <button
+                <motion.button
                   type="submit"
-                  className="w-10 h-10 rounded-xl bg-indigo-500 flex items-center justify-center hover:bg-indigo-400 transition-colors"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center hover:from-indigo-400 hover:to-purple-500 transition-all shadow-lg shadow-indigo-500/30"
                 >
-                  <Send className="w-4 h-4 text-white" />
-                </button>
+                  <Send className="w-5 h-5 text-white" />
+                </motion.button>
               </div>
             </form>
           </motion.div>

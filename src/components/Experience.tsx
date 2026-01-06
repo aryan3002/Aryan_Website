@@ -38,10 +38,14 @@ export default function Experience() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section id="experience" ref={ref} className="relative py-40 lg:py-52 overflow-hidden">
+    <section
+      id="experience"
+      ref={ref}
+      className="relative min-h-screen flex items-center py-32 lg:py-40 overflow-hidden"
+    >
       <div className="absolute inset-0 grid-pattern opacity-20" />
 
-      <div className="container">
+      <div className="container flex flex-col items-center">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 12 }}

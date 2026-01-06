@@ -84,10 +84,14 @@ export default function Skills() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section id="skills" ref={ref} className="relative py-40 lg:py-52 overflow-hidden">
+    <section
+      id="skills"
+      ref={ref}
+      className="relative min-h-screen flex items-center py-32 lg:py-40 overflow-hidden"
+    >
       <div className="absolute inset-0 grid-pattern opacity-20" />
       
-      <div className="container">
+      <div className="container flex flex-col items-center">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 12 }}
@@ -119,11 +123,12 @@ export default function Skills() {
               onClick={() => setActiveCategory(index)}
               whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
               whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
-              className={`px-8 py-3.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+              className={`px-8 py-3.5 rounded-full text-sm font-semibold transition-all duration-300 relative z-10 ${
                 activeCategory === index
                   ? "bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg shadow-indigo-500/30"
                   : "glass text-zinc-400 hover:text-white hover:border-indigo-500/30"
               }`}
+              style={{ cursor: 'pointer' }}
             >
               {cat.title}
             </motion.button>

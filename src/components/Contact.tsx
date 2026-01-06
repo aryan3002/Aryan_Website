@@ -5,9 +5,9 @@ import { motion, useInView, useReducedMotion } from "framer-motion";
 import { Mail, Linkedin, Github, ArrowUpRight, Send, CheckCircle } from "lucide-react";
 
 const socialLinks = [
-  { name: "LinkedIn", icon: Linkedin, href: "https://linkedin.com/in/aryantripathi", color: "from-blue-500 to-cyan-500" },
-  { name: "GitHub", icon: Github, href: "https://github.com/aryan", color: "from-zinc-400 to-zinc-600" },
-  { name: "Email", icon: Mail, href: "mailto:atripath@asu.edu", color: "from-rose-500 to-pink-500" },
+  { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/aryan-tripathi-9254a611b", color: "from-blue-500 to-cyan-500" },
+  { name: "GitHub", icon: Github, href: "https://github.com/aryan3002", color: "from-zinc-400 to-zinc-600" },
+  { name: "Email", icon: Mail, href: "mailto:triaryan3002@gmail.com", color: "from-rose-500 to-pink-500" },
 ];
 
 export default function Contact() {
@@ -23,7 +23,11 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" ref={ref} className="relative py-40 lg:py-52 overflow-hidden">
+    <section
+      id="contact"
+      ref={ref}
+      className="relative min-h-screen flex items-center py-32 lg:py-40 overflow-hidden"
+    >
       <div className="absolute inset-0 grid-pattern opacity-20" />
       
       {/* Gradient Orb - reduced opacity */}
@@ -33,7 +37,7 @@ export default function Contact() {
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-r from-indigo-500/10 to-purple-500/10 blur-3xl pointer-events-none"
       />
 
-      <div className="container relative z-10">
+      <div className="container relative z-10 flex flex-col items-center">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 12 }}

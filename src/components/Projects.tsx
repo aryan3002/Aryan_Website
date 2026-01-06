@@ -51,7 +51,7 @@ const projects: Project[] = [
     ],
     tech: ["Next.js", "GPT-4", "LangChain", "Twilio", "PostgreSQL", "Redis"],
     color: "from-indigo-500 to-purple-500",
-    demoUrl: "#",
+    demoUrl: "https://convo-website-two.vercel.app/",
     githubUrl: "#",
     isHero: true,
   },
@@ -113,39 +113,52 @@ function HeroProject({ project }: { project: Project }) {
       initial={{ opacity: 0 }}
       animate={isInView ? { opacity: 1 } : {}}
       transition={{ duration: 0.8 }}
-      className="relative mb-24"
+      className="relative w-full max-w-6xl mx-auto"
     >
       {/* Glow */}
-      <div className={`absolute inset-0 bg-gradient-to-r ${project.color} opacity-5 blur-3xl rounded-3xl`} />
+      <div className={`absolute inset-0 bg-gradient-to-r ${project.color} opacity-10 blur-3xl rounded-[28px]`} />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/4 via-transparent to-black/40 rounded-[28px]" />
 
-      <div className="relative glass rounded-3xl overflow-hidden">
+      <div className="relative card overflow-hidden border border-white/10 bg-gradient-to-b from-white/5 via-black/40 to-black/80">
         {/* Header */}
-        <div className="p-10 lg:p-16 text-center border-b border-zinc-800/50">
+        <div className="p-10 lg:p-14 text-center border-b border-white/5">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.15 }}
+            className="space-y-4 flex flex-col items-center"
           >
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-zinc-400 mb-6">
-              <Sparkles className="w-4 h-4 text-indigo-400" />
-              Featured Project
-            </span>
-            <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold gradient-text mb-6">
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 text-sm text-zinc-200 border border-white/10">
+                <Sparkles className="w-4 h-4 text-indigo-300" />
+                Featured Project
+              </span>
+              <span className="px-3 py-1 rounded-full bg-indigo-500/15 text-xs text-indigo-100 border border-indigo-400/30">
+                Agentic SaaS
+              </span>
+              <span className="px-3 py-1 rounded-full bg-emerald-500/15 text-xs text-emerald-100 border border-emerald-400/30">
+                Voice + Chat
+              </span>
+              <span className="px-3 py-1 rounded-full bg-cyan-500/15 text-xs text-cyan-100 border border-cyan-400/30">
+                Live Scheduling
+              </span>
+            </div>
+            <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-[0_10px_40px_rgba(99,102,241,0.25)]">
               {project.title}
             </h3>
-            <p className="text-xl md:text-2xl text-zinc-300 max-w-2xl mx-auto">
+            <p className="text-xl md:text-2xl text-zinc-200 max-w-3xl mx-auto leading-relaxed">
               &ldquo;{project.tagline}&rdquo;
             </p>
           </motion.div>
         </div>
 
         {/* Description + Diagram */}
-        <div className="p-10 lg:p-16 border-b border-zinc-800/50">
+        <div className="p-10 lg:p-14 border-b border-white/5 flex flex-col items-center">
           <motion.p
             initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 12 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.45, delay: 0.15 }}
-            className="text-lg text-zinc-400 max-w-2xl mx-auto text-center mb-12"
+            className="text-lg text-zinc-400 max-w-2xl text-center mb-12"
           >
             {project.description}
           </motion.p>
@@ -162,12 +175,12 @@ function HeroProject({ project }: { project: Project }) {
         </div>
 
         {/* Features */}
-        <div className="p-10 lg:p-16">
+        <div className="p-10 lg:p-14">
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.45, delay: 0.25 }}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid md:grid-cols-2 gap-6"
           >
             {project.features.map((feature, i) => (
               <motion.div
@@ -175,7 +188,7 @@ function HeroProject({ project }: { project: Project }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.5 + i * 0.1 }}
-                className="glass rounded-xl p-5 group hover:border-indigo-500/30 transition-colors"
+                className="card bg-white/2 rounded-2xl p-5 group hover:border-indigo-400/40 hover:shadow-indigo-500/10"
               >
                 <div className={`w-10 h-10 rounded-lg bg-gradient-to-r ${project.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
                   <feature.icon className="w-5 h-5 text-white" />
@@ -188,8 +201,8 @@ function HeroProject({ project }: { project: Project }) {
         </div>
 
         {/* Tech + Links */}
-        <div className="p-10 lg:p-16 bg-zinc-900/50 flex flex-col md:flex-row items-center justify-center gap-6">
-          <div className="flex flex-wrap justify-center gap-2">
+        <div className="p-10 lg:p-14 bg-gradient-to-r from-white/3 via-black/40 to-white/5 border-t border-white/5 flex flex-col lg:flex-row items-center justify-between gap-6">
+          <div className="flex flex-wrap justify-center gap-2 max-w-2xl">
             {project.tech.map((tech) => (
               <span key={tech} className="px-3 py-1.5 text-xs font-medium bg-zinc-800 text-zinc-400 rounded-full">
                 {tech}
@@ -200,6 +213,8 @@ function HeroProject({ project }: { project: Project }) {
             {project.demoUrl && (
               <motion.a
                 href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 className="btn-primary flex items-center gap-2"
               >
@@ -314,14 +329,18 @@ export default function Projects() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const shouldReduceMotion = useReducedMotion();
 
-  const heroProject = projects.find((p) => p.isHero);
+  const heroProject = projects.find((p) => p.isHero) ?? projects[0];
   const otherProjects = projects.filter((p) => !p.isHero);
 
   return (
-    <section id="projects" ref={ref} className="relative py-40 lg:py-52 overflow-hidden">
+    <section
+      id="projects"
+      ref={ref}
+      className="relative min-h-screen flex items-center py-32 lg:py-40 overflow-hidden"
+    >
       <div className="absolute inset-0 grid-pattern opacity-20" />
 
-      <div className="container">
+      <div className="container w-full flex flex-col items-center">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 12 }}
@@ -341,12 +360,10 @@ export default function Projects() {
         </motion.div>
 
         {/* Hero Project */}
-        <div className="flex justify-center mb-20">
-          {heroProject && <HeroProject project={heroProject} />}
-        </div>
+        <HeroProject project={heroProject} />
 
         {/* Other Projects */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mt-20">
           {otherProjects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}

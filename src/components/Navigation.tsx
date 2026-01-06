@@ -35,7 +35,7 @@ export default function Navigation() {
         }`}
         style={{ height: '72px' }}
       >
-        <div className="container h-full">
+        <div className="w-full px-12 h-full">
           <div className="flex items-center justify-between h-full">
             {/* Logo */}
             <Link href="/" className="group">
@@ -45,7 +45,7 @@ export default function Navigation() {
             </Link>
 
             {/* Desktop Nav */}
-            <div className="hidden md:flex items-center gap-1">
+            <div className="hidden md:flex items-center gap-3">
               {navItems.map((item, i) => (
                 <motion.div
                   key={item.name}
@@ -55,7 +55,7 @@ export default function Navigation() {
                 >
                   <Link
                     href={item.href}
-                    className="px-4 py-2 text-sm text-zinc-400 hover:text-white transition-colors"
+                    className="px-6 py-3 text-sm font-medium text-zinc-400 hover:text-white transition-colors rounded-lg hover:bg-white/5"
                   >
                     {item.name}
                   </Link>
@@ -68,7 +68,7 @@ export default function Navigation() {
               >
                 <Link
                   href="#contact"
-                  className="ml-4 px-5 py-2.5 text-sm font-medium bg-white text-black rounded-full hover:bg-zinc-200 transition-colors"
+                  className="ml-6 px-8 py-3 text-sm font-semibold bg-white text-black rounded-full hover:bg-zinc-200 transition-colors shadow-lg"
                 >
                   Let&apos;s Talk
                 </Link>
